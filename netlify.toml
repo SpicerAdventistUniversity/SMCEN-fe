@@ -1,0 +1,13 @@
+# Netlify configuration file
+# Place this in the root of your project
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+  node_version = "22.11.0"  # or your desired Node version
+
+# Optional: redirect all routes to index.html (for SPA routing)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
