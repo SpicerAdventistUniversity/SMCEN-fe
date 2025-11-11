@@ -6,16 +6,16 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 // Courses list with correct credit hours
 const courses = [
-  { code: "RELB151", title: "Christian Beliefs I", credit: 2, semester: "I" },
-  { code: "RELB291", title: "Apocalyptic Literature", credit: 2, semester: "I" },
-  { code: "RELB125", title: "Life and Teachings of Jesus", credit: 3, semester: "I" },
-  { code: "RELB238", title: "Adventist Heritage", credit: 3, semester: "I" },
-  { code: "EDUC131", title: "Philosophy of Education", credit: 2, semester: "I" },
-  { code: "RELB152", title: "Christian Beliefs II", credit: 3, semester: "II" },
-  { code: "FNCE451", title: "Church Stewardship & Finance", credit: 3, semester: "II" },
-  { code: "RELB292", title: "Apocalyptic Literature", credit: 2, semester: "II" },
-  { code: "RELB151_2", title: "Religions of the World", credit: 2, semester: "II" },
-  { code: "HLED121", title: "Personal Health", credit: 2, semester: "II" },
+  { code: "RELB151", title: "Christian Beliefs I/Moral Principles I", credit: 2, semester: "I",mentor:"Mrs. Sharon Clinton" },
+  { code: "RELB291", title: "Apocalyptic Literature/Daniel", credit: 2, semester: "I",mentor:"Dr. Jesin Israel" },
+  { code: "RELB125", title: "Life and Teachings of Jesus", credit: 3, semester: "I",mentor:"Mr. Gaiphun Gangmei" },
+  { code: "RELB238", title: "Adventist Heritage", credit: 3, semester: "I",mentor:"Dr. Koberson Langhu" },
+  { code: "EDUC131", title: "Philosophy of Education", credit: 2, semester: "I",mentor:"Dr. Carol Linda Kingston" },
+  { code: "WREL234", title: "Religions of the World", credit: 3, semester: "II",mentor:"Mr. Gaiphun Gangmei" },
+  { code: "HLED121", title: "Personal Health", credit: 2, semester: "II",mentor:"Pr. Vanlaltluaga Khuma" },
+  { code: "RELB152", title: "Christian Beliefs II/Moral Principles II", credit: 2, semester: "II",mentor:"Mrs. Sharon Clinton" },
+  { code: "FNCE252", title: "Church Stewardship & Finance", credit: 3, semester: "II",mentor:"Mr. Abhishek Lakra" },
+  { code: "RELB292", title: "Apocalyptic Literature II/Revelation", credit: 2, semester: "II",mentor:"Dr. Jesin Israel" },
 ];
 
 const gradingScale = [
@@ -61,7 +61,7 @@ const AdminDashboard = () => {
     const fetchUsers = async () => {
       try {
         const token = localStorage.getItem("adminToken"); // or however you stored it
-        const res = await axios.get("http://localhost:5000/api/admin/users", {
+        const res = await axios.get("https://smcen-be.onrender.com/api/admin/users", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -118,7 +118,7 @@ const AdminDashboard = () => {
         };
       });
 
-      await axios.put(`http://localhost:5000/api/admin/update-grades/${editingUser._id}`, {
+      await axios.put(`https://smcen-be.onrender.com/api/admin/update-grades/${editingUser._id}`, {
         grades: formattedGrades,
       });
 
@@ -146,12 +146,12 @@ const AdminDashboard = () => {
   );
 
   const handleDownloadCertificates = () => {
-    window.open("http://localhost:5000/api/admin/download-certificates", "_blank");
+    window.open("https://smcen-be.onrender.com/api/admin/download-certificates", "_blank");
   };
 
   const handleDownloadUser = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/users/export/csv", {
+      const res = await axios.get("https://smcen-be.onrender.com/api/users/export/csv", {
         responseType: "blob",
       });
 
@@ -168,6 +168,26 @@ const AdminDashboard = () => {
       toast.error("Failed to download CSV.");
     }
   };
+
+  const handleDownloadUserSem2 = async () => {
+  try {
+    const res = await axios.get("https://smcen-be.onrender.com/api/users/export/csv-sem2", {
+      responseType: "blob",
+    });
+
+    const url = window.URL.createObjectURL(new Blob([res.data]));
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "sem2_students.csv");
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    toast.success("Sem 2 CSV downloaded successfully!");
+  } catch (err) {
+    toast.error("Failed to download Sem 2 CSV.");
+  }
+};
 
 
   return (
@@ -233,10 +253,13 @@ const AdminDashboard = () => {
             <>
               <div className="d-flex justify-content-center gap-4 mb-4">
                 <Button variant="outline-success" size="lg" className="shadow" onClick={handleDownloadCertificates}>
-                  📥 Download Certificates
+                  📥 Download all Transcripts
                 </Button>
                 <Button variant="outline-warning" size="lg" className="shadow" onClick={handleDownloadUser}>
-                  📥 Download User Info
+                  📥 Download all User Info
+                </Button>
+                <Button variant="outline-info" size="lg" className="shadow" onClick={handleDownloadUserSem2}>
+                  📥 Download sem II Registration
                 </Button>
               </div>
 

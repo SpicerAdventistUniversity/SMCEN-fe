@@ -5,16 +5,16 @@ import Navbar from "./Navbar";
 
 // Course List with Credit Hours
 const courses = [
-  { code: "RELB151", title: "Christian Beliefs I", credit: 2, semester: "I" },
-  { code: "RELB291", title: "Apocalyptic Literature", credit: 2, semester: "I" },
-  { code: "RELB125", title: "Life and Teachings of Jesus", credit: 3, semester: "I" },
-  { code: "RELB238", title: "Adventist Heritage", credit: 3, semester: "I" },
-  { code: "EDUC131", title: "Philosophy of Education", credit: 2, semester: "I" },
-  { code: "RELB152", title: "Christian Beliefs II", credit: 3, semester: "II" },
-  { code: "FNCE451", title: "Church Stewardship & Finance", credit: 3, semester: "II" },
-  { code: "RELB292", title: "Apocalyptic Literature", credit: 2, semester: "II" },
-  { code: "RELB151_2", title: "Religions of the World", credit: 2, semester: "II" },
-  { code: "HLED121", title: "Personal Health", credit: 2, semester: "II" },
+  { code: "RELB151", title: "Christian Beliefs I/Moral Principles I", credit: 2, semester: "I",mentor:"Mrs. Sharon Clinton" },
+  { code: "RELB291", title: "Apocalyptic Literature/Daniel", credit: 2, semester: "I",mentor:"Dr. Jesin Israel" },
+  { code: "RELB125", title: "Life and Teachings of Jesus", credit: 3, semester: "I",mentor:"Mr. Gaiphun Gangmei" },
+  { code: "RELB238", title: "Adventist Heritage", credit: 3, semester: "I",mentor:"Dr. Koberson Langhu" },
+  { code: "EDUC131", title: "Philosophy of Education", credit: 2, semester: "I",mentor:"Dr. Carol Linda Kingston" },
+  { code: "WREL234", title: "Religions of the World", credit: 3, semester: "II",mentor:"Mr. Gaiphun Gangmei" },
+  { code: "HLED121", title: "Personal Health", credit: 2, semester: "II",mentor:"Pr. Vanlaltluaga Khuma" },
+  { code: "RELB152", title: "Christian Beliefs II/Moral Principles II", credit: 2, semester: "II",mentor:"Mrs. Sharon Clinton" },
+  { code: "FNCE252", title: "Church Stewardship & Finance", credit: 3, semester: "II",mentor:"Mr. Abhishek Lakra" },
+  { code: "RELB292", title: "Apocalyptic Literature II/Revelation", credit: 2, semester: "II",mentor:"Dr. Jesin Israel" },
 ];
 
 const AssignGrade = () => {
@@ -27,7 +27,7 @@ const AssignGrade = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/admin/users", {
+        const res = await axios.get("https://smcen-be.onrender.com/api/admin/users", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
           },
@@ -49,7 +49,7 @@ const AssignGrade = () => {
   // 🔹 Function to Download All Certificates
   const handleDownloadCertificates = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/admin/download-certificates", {
+      const response = await axios.get("https://smcen-be.onrender.com/api/admin/download-certificates", {
         responseType: "blob",
       });
 
@@ -69,7 +69,7 @@ const AssignGrade = () => {
   // 🔹 Function to Download a Single User's Certificate
   const handleDownloadUserCertificate = async (userId, userName) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/admin/download-certificate/${userId}`, {
+      const response = await axios.get(`https://smcen-be.onrender.com/api/admin/download-certificate/${userId}`, {
         responseType: "blob",
       });
 

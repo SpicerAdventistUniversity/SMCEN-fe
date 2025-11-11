@@ -47,6 +47,9 @@ function Navbar() {
               <MDBNavbarItem>
                 <MDBNavbarLink href='/assign'>View_Grades</MDBNavbarLink>
               </MDBNavbarItem>
+               <MDBNavbarItem>
+                <MDBNavbarLink href='/students'>View_Info</MDBNavbarLink>
+              </MDBNavbarItem>
               <MDBNavbarItem>
                 <MDBNavbarLink href='/login'>Student_login</MDBNavbarLink>
               </MDBNavbarItem>

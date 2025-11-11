@@ -1,0 +1,47 @@
+/* StudentDetails.css */
+
+/* Hide elements that shouldn't appear in print (e.g., Navbar) */
+@media print {
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif; /* Adjust font for print */
+    }
+  
+    .navbar, .btn, .search-bar {
+      display: none; /* Hide navbar, buttons, and search bar during print */
+    }
+  
+    .container, .card {
+      width: 100%; /* Ensure the container takes up full width */
+      padding: 10px; /* Reduce padding to fit content */
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      page-break-inside: avoid; /* Prevent table from breaking into multiple pages */
+    }
+  
+    th, td {
+      font-size: 12px; /* Adjust font size for print */
+      padding: 8px; /* Reduce padding for print */
+      border: 1px solid #ddd; /* Ensure borders appear */
+    }
+  
+    td {
+      word-wrap: break-word; /* Allow long words to break for better fitting */
+    }
+  
+    h3, h2 {
+      font-size: 16px; /* Adjust header sizes */
+      margin-bottom: 10px;
+    }
+  
+    /* Make sure everything fits on one page */
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+  }
+  
