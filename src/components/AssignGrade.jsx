@@ -89,7 +89,7 @@ const AssignGrade = () => {
   //Function to Download a single user's sem 1 certificate
    const handleDownloadUsersem1Certificate = async (userId, userName) => {
     try {
-      const response = await axios.get(`https://smcen-be.onrender.com/api/admin/download-sem1/:userId`, {
+      const response = await axios.get(`https://smcen-be.onrender.com/api/admin/download-sem1/${userId}`, {
         responseType: "blob",
       });
 
@@ -109,7 +109,7 @@ const AssignGrade = () => {
     //Function to Download a single user's sem 2 certificate
    const handleDownloadUsersem2Certificate = async (userId, userName) => {
     try {
-      const response = await axios.get(`https://smcen-be.onrender.com/api/admin/download-sem2/:userId`, {
+      const response = await axios.get(`https://smcen-be.onrender.com/api/admin/download-sem2/${userId}`, {
         responseType: "blob",
       });
 
