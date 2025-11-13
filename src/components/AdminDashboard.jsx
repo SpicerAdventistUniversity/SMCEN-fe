@@ -6,16 +6,16 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 // Courses list with correct credit hours
 const courses = [
-  { code: "RELB151", title: "Christian Beliefs I/Moral Principles I", credit: 2, semester: "I",mentor:"Mrs. Sharon Clinton" },
-  { code: "RELB291", title: "Apocalyptic Literature/Daniel", credit: 2, semester: "I",mentor:"Dr. Jesin Israel" },
+  { code: "RELB151", title: "Christian Beliefs I", credit: 2, semester: "I",mentor:"Mrs. Sharon Clinton" },
+  { code: "RELB291", title: "Apocalyptic Literature I", credit: 2, semester: "I",mentor:"Dr. Jesin Israel" },
   { code: "RELB125", title: "Life and Teachings of Jesus", credit: 3, semester: "I",mentor:"Mr. Gaiphun Gangmei" },
   { code: "RELB238", title: "Adventist Heritage", credit: 3, semester: "I",mentor:"Dr. Koberson Langhu" },
-  { code: "EDUC131", title: "Philosophy of Education", credit: 2, semester: "I",mentor:"Dr. Carol Linda Kingston" },
+  { code: "EDUC231", title: "Philosophy of Education", credit: 2, semester: "I",mentor:"Dr. Carol Linda Kingston" },
   { code: "WREL234", title: "Religions of the World", credit: 3, semester: "II",mentor:"Mr. Gaiphun Gangmei" },
   { code: "HLED121", title: "Personal Health", credit: 2, semester: "II",mentor:"Pr. Vanlaltluaga Khuma" },
-  { code: "RELB152", title: "Christian Beliefs II/Moral Principles II", credit: 2, semester: "II",mentor:"Mrs. Sharon Clinton" },
+  { code: "RELB152", title: "Christian Beliefs II", credit: 2, semester: "II",mentor:"Mrs. Sharon Clinton" },
   { code: "FNCE252", title: "Church Stewardship & Finance", credit: 3, semester: "II",mentor:"Mr. Abhishek Lakra" },
-  { code: "RELB292", title: "Apocalyptic Literature II/Revelation", credit: 2, semester: "II",mentor:"Dr. Jesin Israel" },
+  { code: "RELB292", title: "Apocalyptic Literature II", credit: 2, semester: "II",mentor:"Dr. Jesin Israel" },
 ];
 
 const gradingScale = [

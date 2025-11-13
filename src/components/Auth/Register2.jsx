@@ -19,9 +19,9 @@ const Register2 = () => {
     const SecondSemesterCourses = [
         { code: "WREL234", title: "Religions of the World", credit: 3, semester: "II", mentor: "Mr. Gaiphun Gangmei" },
         { code: "HLED121", title: "Personal Health", credit: 2, semester: "II", mentor: "Pr. Vanlaltluaga Khuma" },
-        { code: "RELB152", title: "Christian Beliefs II/Moral Principles II", credit: 2, semester: "II", mentor: "Mrs. Sharon Clinton" },
+        { code: "RELB152", title: "Christian Beliefs II", credit: 2, semester: "II", mentor: "Mrs. Sharon Clinton" },
         { code: "FNCE252", title: "Church Stewardship & Finance", credit: 3, semester: "II", mentor: "Mr. Abhishek Lakra" },
-        { code: "RELB292", title: "Apocalyptic Literature II/Revelation", credit: 2, semester: "II", mentor: "Dr. Jesin Israel" },
+        { code: "RELB292", title: "Apocalyptic Literature II", credit: 2, semester: "II", mentor: "Dr. Jesin Israel" },
     ];
 
     const handleChange = (e) => {

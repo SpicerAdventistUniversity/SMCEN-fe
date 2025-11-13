@@ -40,11 +40,11 @@ const Register = () => {
 
   // Course data, split into two categories: Semester I and Semester II
   const firstSemesterCourses = [
-    { code: "RELB151", title: "Christian Beliefs I/Moral Principles I", credit: 2, semester: "I", mentor: "Mrs. Sharon Clinton" },
-    { code: "RELB291", title: "Apocalyptic Literature/Daniel", credit: 2, semester: "I", mentor: "Dr. Jesin Israel" },
+    { code: "RELB151", title: "Christian Beliefs I", credit: 2, semester: "I", mentor: "Mrs. Sharon Clinton" },
+    { code: "RELB291", title: "Apocalyptic Literature I", credit: 2, semester: "I", mentor: "Dr. Jesin Israel" },
     { code: "RELB125", title: "Life and Teachings of Jesus", credit: 3, semester: "I", mentor: "Mr. Gaiphun Gangmei" },
     { code: "RELB238", title: "Adventist Heritage", credit: 3, semester: "I", mentor: "Dr. Koberson Langhu" },
-    { code: "EDUC131", title: "Philosophy of Education", credit: 2, semester: "I", mentor: "Dr. Carol Linda Kingston" },
+    { code: "EDUC231", title: "Philosophy of Education", credit: 2, semester: "I", mentor: "Dr. Carol Linda Kingston" },
   ];
 
   const handleChange = (e) => {
