@@ -208,13 +208,13 @@ const AssignGrade = () => {
                 variant="danger" 
                 onClick={() => handleDownloadUsersem1Certificate(selectedUser._id, selectedUser.name)}
               >
-                📥 Download Certificate
+                📥 Download sem1 marksheet
               </Button>
               <Button 
                 variant="danger" 
                 onClick={() => handleDownloadUsersem2Certificate(selectedUser._id, selectedUser.name)}
               >
-                📥 Download Certificate
+                📥 Download sem2 marksheet
               </Button>
             </div>
           </div>
