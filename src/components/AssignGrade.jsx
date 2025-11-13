@@ -86,6 +86,45 @@ const AssignGrade = () => {
     }
   };
 
+  //Function to Download a single user's sem 1 certificate
+   const handleDownloadUsersem1Certificate = async (userId, userName) => {
+    try {
+      const response = await axios.get(`https://smcen-be.onrender.com/api/admin/download-sem1/:userId`, {
+        responseType: "blob",
+      });
+
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `${userName}_Certificate.pdf`); // 📌 Save as PDF
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+    } catch (error) {
+      console.error(`❌ Error downloading ${userName}'s certificate:`, error);
+      alert(`Failed to download ${userName}'s certificate. Try again.`);
+    }
+  };
+
+    //Function to Download a single user's sem 2 certificate
+   const handleDownloadUsersem2Certificate = async (userId, userName) => {
+    try {
+      const response = await axios.get(`https://smcen-be.onrender.com/api/admin/download-sem2/:userId`, {
+        responseType: "blob",
+      });
+
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `${userName}_Certificate.pdf`); // 📌 Save as PDF
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+    } catch (error) {
+      console.error(`❌ Error downloading ${userName}'s certificate:`, error);
+      alert(`Failed to download ${userName}'s certificate. Try again.`);
+    }
+  };
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -162,6 +201,18 @@ const AssignGrade = () => {
               <Button 
                 variant="danger" 
                 onClick={() => handleDownloadUserCertificate(selectedUser._id, selectedUser.name)}
+              >
+                📥 Download Certificate
+              </Button>
+              <Button 
+                variant="danger" 
+                onClick={() => handleDownloadUsersem1Certificate(selectedUser._id, selectedUser.name)}
+              >
+                📥 Download Certificate
+              </Button>
+              <Button 
+                variant="danger" 
+                onClick={() => handleDownloadUsersem2Certificate(selectedUser._id, selectedUser.name)}
               >
                 📥 Download Certificate
               </Button>
