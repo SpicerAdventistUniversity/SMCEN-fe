@@ -149,6 +149,14 @@ const AdminDashboard = () => {
     window.open("https://smcen-be.onrender.com/api/admin/download-certificates", "_blank");
   };
 
+  const handleallsem1Certificates = () => {
+    window.open("https://smcen-be.onrender.com/api/admin/download-sem1", "_blank");
+  };
+  const handleallsem2Certificates = () => {
+    window.open("https://smcen-be.onrender.com/api/admin/download-sem2", "_blank");
+  };
+
+
   const handleDownloadUser = async () => {
     try {
       const res = await axios.get("https://smcen-be.onrender.com/api/users/export/csv", {
@@ -254,6 +262,12 @@ const AdminDashboard = () => {
               <div className="d-flex justify-content-center gap-4 mb-4">
                 <Button variant="outline-success" size="lg" className="shadow" onClick={handleDownloadCertificates}>
                   📥 Download all Transcripts
+                </Button>
+                <Button variant="outline-success" size="lg" className="shadow" onClick={handleallsem1Certificates}>
+                  📥 Download all sem1 Marksheets
+                </Button>
+                <Button variant="outline-success" size="lg" className="shadow" onClick={handleallsem2Certificates}>
+                  📥 Download all sem2 Marksheets
                 </Button>
                 <Button variant="outline-warning" size="lg" className="shadow" onClick={handleDownloadUser}>
                   📥 Download all User Info
