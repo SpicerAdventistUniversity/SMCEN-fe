@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Table, Spinner, Alert, Card, Button, Form } from "react-bootstrap";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 import './StudentsDetails.css'; // Ensure this import is at the top of the StudentDetails.jsx file
 
 // Course List with Credit Hours
@@ -262,6 +263,7 @@ const filteredStudents = students
           )}
         </Card>
       </Container>
+      <Footer/>
     </>
   );
 };
