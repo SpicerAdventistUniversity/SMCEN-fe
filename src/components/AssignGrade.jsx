@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Table, Spinner, Alert, Card, Button, Form } from "react-bootstrap";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 // Course List with Credit Hours
 const courses = [
@@ -255,6 +256,7 @@ const AssignGrade = () => {
         )}
       </Card>
     </Container>
+    <Footer/>
     </>
   );
 };
