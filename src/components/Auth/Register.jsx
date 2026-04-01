@@ -1,8 +1,14 @@
-
-
 import { useState } from "react";
 import axios from "axios";
-import { Form, Button, Container, Card, Row, Col, InputGroup } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Container,
+  Card,
+  Row,
+  Col,
+  InputGroup,
+} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -16,6 +22,7 @@ const Register = () => {
     password: "",
     dateOfBirth: "",
     basisOfAdmission: "",
+    eligibilityDocument: null,
     collegeAttended: "",
     gender: "",
     maritalStatus: "",
@@ -40,11 +47,41 @@ const Register = () => {
 
   // Course data, split into two categories: Semester I and Semester II
   const firstSemesterCourses = [
-    { code: "RELB151", title: "Christian Beliefs I", credit: 2, semester: "I", mentor: "Mrs. Sharon Clinton" },
-    { code: "RELB291", title: "Apocalyptic Literature I", credit: 2, semester: "I", mentor: "Dr. Jesin Israel" },
-    { code: "RELB125", title: "Life and Teachings of Jesus", credit: 3, semester: "I", mentor: "Mr. Gaiphun Gangmei" },
-    { code: "RELB238", title: "Adventist Heritage", credit: 3, semester: "I", mentor: "Dr. Koberson Langhu" },
-    { code: "EDUC231", title: "Philosophy of Education", credit: 2, semester: "I", mentor: "Dr. Carol Linda Kingston" },
+    {
+      code: "RELB151",
+      title: "Christian Beliefs I",
+      credit: 2,
+      semester: "I",
+      mentor: "Mrs. Sharon Clinton",
+    },
+    {
+      code: "RELB291",
+      title: "Apocalyptic Literature I",
+      credit: 2,
+      semester: "I",
+      mentor: "Dr. Jesin Israel",
+    },
+    {
+      code: "RELB125",
+      title: "Life and Teachings of Jesus",
+      credit: 3,
+      semester: "I",
+      mentor: "Mr. Gaiphun Gangmei",
+    },
+    {
+      code: "RELB238",
+      title: "Adventist Heritage",
+      credit: 3,
+      semester: "I",
+      mentor: "Dr. Koberson Langhu",
+    },
+    {
+      code: "EDUC231",
+      title: "Philosophy of Education",
+      credit: 2,
+      semester: "I",
+      mentor: "Dr. Carol Linda Kingston",
+    },
   ];
 
   const handleChange = (e) => {
@@ -69,7 +106,7 @@ const Register = () => {
       updatedSelectedCourses.push(selectedCourseCode);
     } else {
       updatedSelectedCourses = updatedSelectedCourses.filter(
-        (course) => course !== selectedCourseCode
+        (course) => course !== selectedCourseCode,
       );
     }
 
@@ -78,7 +115,9 @@ const Register = () => {
     // Calculate total fee
     let calculatedFee = 0;
     updatedSelectedCourses.forEach((courseCode) => {
-      const course = [...firstSemesterCourses].find((c) => c.code === courseCode);
+      const course = [...firstSemesterCourses].find(
+        (c) => c.code === courseCode,
+      );
       if (course) {
         calculatedFee += course.credit * 18 * 75; // 75rs per class, 18 weeks
       }
@@ -122,7 +161,6 @@ const Register = () => {
   //   }
   // };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -143,15 +181,22 @@ const Register = () => {
 
       formDataToSend.append("totalFee", totalFee); // Also correct
 
-      await axios.post("https://smcen-be.onrender.com/api/users/register", formDataToSend, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.post(
+        "https://smcen-be.onrender.com/api/users/register",
+        formDataToSend,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        },
+      );
 
       toast.success("Registration successful!");
       navigate("/login");
     } catch (error) {
       console.error("Registration Error:", error);
-      toast.error(error.response?.data?.message || "Registration failed. Please try again.");
+      toast.error(
+        error.response?.data?.message ||
+          "Registration failed. Please try again.",
+      );
     }
   };
 
@@ -169,10 +214,28 @@ const Register = () => {
             <Row>
               <Col md={6}>
                 <Form.Group className="mb-3">
-                  <Form.Label>Registration Type <span className="text-danger">*</span></Form.Label>
+                  <Form.Label>
+                    Registration Type <span className="text-danger">*</span>
+                  </Form.Label>
                   <div>
-                    <Form.Check inline label="New" type="radio" name="registrationType" value="NEW" checked={formData.registrationType === "NEW"} onChange={handleChange} />
-                    <Form.Check inline label="Old" type="radio" name="registrationType" value="OLD" checked={formData.registrationType === "OLD"} onChange={handleChange} />
+                    <Form.Check
+                      inline
+                      label="New"
+                      type="radio"
+                      name="registrationType"
+                      value="NEW"
+                      checked={formData.registrationType === "NEW"}
+                      onChange={handleChange}
+                    />
+                    <Form.Check
+                      inline
+                      label="Old"
+                      type="radio"
+                      name="registrationType"
+                      value="OLD"
+                      checked={formData.registrationType === "OLD"}
+                      onChange={handleChange}
+                    />
                   </div>
                 </Form.Group>
               </Col>
@@ -182,106 +245,286 @@ const Register = () => {
             <Row>
               <Col md={6}>
                 <Form.Group className="mb-3">
-                  <Form.Label>Full Name <span className="text-danger">*</span></Form.Label>
-                  <Form.Control type="text" name="name" value={formData.name} onChange={handleChange} required />
+                  <Form.Label>
+                    Full Name <span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>E-Mail <span className="text-danger">*</span></Form.Label>
-                  <Form.Control type="email" name="email" value={formData.email} onChange={handleChange} required />
+                  <Form.Label>
+                    E-Mail <span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
                 </Form.Group>
 
                 <Form.Group controlId="formPassword" className="mb-3">
-                  <Form.Label>Password <span className="text-danger">*</span></Form.Label>
+                  <Form.Label>
+                    Password <span className="text-danger">*</span>
+                  </Form.Label>
                   <InputGroup>
-                    <Form.Control type={showPassword ? "text" : "password"} name="password" value={formData.password} onChange={handleChange} required /><Button variant="outline-secondary" onClick={() => setShowPassword(!showPassword)}>
-                      {showPassword ? <EyeSlash /> : <Eye />} {/* 👀 Toggle Icon */}
+                    <Form.Control
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      required
+                    />
+                    <Button
+                      variant="outline-secondary"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? <EyeSlash /> : <Eye />}{" "}
+                      {/* 👀 Toggle Icon */}
                     </Button>
                   </InputGroup>
 
-                  <h6 style={{ color: "red" }}><i>Create a new password</i></h6>
+                  <h6 style={{ color: "red" }}>
+                    <i>Create a new password</i>
+                  </h6>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Date of Birth <span className="text-danger">*</span></Form.Label>
-                  <Form.Control type="date" name="dateOfBirth" value={formData.dateOfBirth} onChange={handleChange} required />
+                  <Form.Label>
+                    Date of Birth <span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="date"
+                    name="dateOfBirth"
+                    value={formData.dateOfBirth}
+                    onChange={handleChange}
+                    required
+                  />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Gender <span className="text-danger">*</span></Form.Label>
+                  <Form.Label>
+                    Gender <span className="text-danger">*</span>
+                  </Form.Label>
                   <div>
-                    <Form.Check inline label="Male" type="radio" name="gender" value="Male" onChange={handleChange} />
-                    <Form.Check inline label="Female" type="radio" name="gender" value="Female" onChange={handleChange} />
-                    <Form.Check inline label="Other" type="radio" name="gender" value="Other" onChange={handleChange} />
+                    <Form.Check
+                      inline
+                      label="Male"
+                      type="radio"
+                      name="gender"
+                      value="Male"
+                      onChange={handleChange}
+                    />
+                    <Form.Check
+                      inline
+                      label="Female"
+                      type="radio"
+                      name="gender"
+                      value="Female"
+                      onChange={handleChange}
+                    />
+                    <Form.Check
+                      inline
+                      label="Other"
+                      type="radio"
+                      name="gender"
+                      value="Other"
+                      onChange={handleChange}
+                    />
                   </div>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Marital Status <span className="text-danger">*</span></Form.Label>
+                  <Form.Label>
+                    Marital Status <span className="text-danger">*</span>
+                  </Form.Label>
                   <div>
-                    <Form.Check inline label="Single" type="radio" name="maritalStatus" value="Single" onChange={handleChange} />
-                    <Form.Check inline label="Married" type="radio" name="maritalStatus" value="Married" onChange={handleChange} />
+                    <Form.Check
+                      inline
+                      label="Single"
+                      type="radio"
+                      name="maritalStatus"
+                      value="Single"
+                      onChange={handleChange}
+                    />
+                    <Form.Check
+                      inline
+                      label="Married"
+                      type="radio"
+                      name="maritalStatus"
+                      value="Married"
+                      onChange={handleChange}
+                    />
                   </div>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Eligibility of Admission <span className="text-danger">*</span></Form.Label>
-                  <Form.Control type="text" name="basisOfAdmission" value={formData.basisOfAdmission} onChange={handleChange} required />
+                  <Form.Label>
+                    Eligibility of Admission{" "}
+                    <span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="basisOfAdmission"
+                    value={formData.basisOfAdmission}
+                    onChange={handleChange}
+                    required
+                  />
                   <h6>(eg. Bachelor of Arts, Master of Science, 12th PASS)</h6>
                 </Form.Group>
-
                 <Form.Group className="mb-3">
-                  <Form.Label>College Attended <span className="text-danger">*</span></Form.Label>
-                  <Form.Control type="text" name="collegeAttended" value={formData.collegeAttended} onChange={handleChange} required />
-                  <h6>(eg. Spicer Adventist University, Lowry Adventist College)</h6>
+                  <Form.Label>
+                    Upload Eligibility Document{" "}
+                    <span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="file"
+                    name="eligibilityDocument"
+                    onChange={handleFileChange}
+                    required
+                  />
+                  <h6>
+                    (Upload 12th / Graduation Certificate - PDF, JPG, JPEG, PNG)
+                  </h6>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Mother Tongue <span className="text-danger">*</span></Form.Label>
-                  <Form.Control type="text" name="motherTongue" value={formData.motherTongue} onChange={handleChange} required />
+                  <Form.Label>
+                    College Attended <span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="collegeAttended"
+                    value={formData.collegeAttended}
+                    onChange={handleChange}
+                    required
+                  />
+                  <h6>
+                    (eg. Spicer Adventist University, Lowry Adventist College)
+                  </h6>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    Mother Tongue <span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="motherTongue"
+                    value={formData.motherTongue}
+                    onChange={handleChange}
+                    required
+                  />
                 </Form.Group>
               </Col>
 
               <Col md={6}>
                 <Form.Group className="mb-3">
-                  <Form.Label>Full Address <span className="text-danger">*</span></Form.Label>
-                  <Form.Control as="textarea" rows={2} name="address" value={formData.address} onChange={handleChange} required />
+                  <Form.Label>
+                    Full Address <span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={2}
+                    name="address"
+                    value={formData.address}
+                    onChange={handleChange}
+                    required
+                  />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>State <span className="text-danger">*</span></Form.Label>
-                  <Form.Control type="text" name="state" value={formData.state} onChange={handleChange} required />
+                  <Form.Label>
+                    State <span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="state"
+                    value={formData.state}
+                    onChange={handleChange}
+                    required
+                  />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Are you an Adventist? <span className="text-danger">*</span></Form.Label>
+                  <Form.Label>
+                    Are you an Adventist? <span className="text-danger">*</span>
+                  </Form.Label>
                   <div>
-                    <Form.Check inline label="Yes" type="radio" name="isAdventist" value="Yes" onChange={handleChange} />
-                    <Form.Check inline label="No" type="radio" name="isAdventist" value="No" onChange={handleChange} />
+                    <Form.Check
+                      inline
+                      label="Yes"
+                      type="radio"
+                      name="isAdventist"
+                      value="Yes"
+                      onChange={handleChange}
+                    />
+                    <Form.Check
+                      inline
+                      label="No"
+                      type="radio"
+                      name="isAdventist"
+                      value="No"
+                      onChange={handleChange}
+                    />
                   </div>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
                   <h6>If Yes?</h6>
                   <Form.Label>Name of your Union</Form.Label>
-                  <Form.Control type="text" name="union" value={formData.union} onChange={handleChange} />
+                  <Form.Control
+                    type="text"
+                    name="union"
+                    value={formData.union}
+                    onChange={handleChange}
+                  />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Name of your Section/Region/Conference</Form.Label>
-                  <Form.Control type="text" name="sectionRegionConference" value={formData.sectionRegionConference} onChange={handleChange} />
+                  <Form.Label>
+                    Name of your Section/Region/Conference
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="sectionRegionConference"
+                    value={formData.sectionRegionConference}
+                    onChange={handleChange}
+                  />
                 </Form.Group>
                 <Form.Group className="mb-3">
                   <Form.Label>Place of Work</Form.Label>
-                  <Form.Control type="text" name="workplace" value={formData.workplace} onChange={handleChange} />
+                  <Form.Control
+                    type="text"
+                    name="workplace"
+                    value={formData.workplace}
+                    onChange={handleChange}
+                  />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Phone Number <span className="text-danger">*</span></Form.Label>
-                  <Form.Control type="tel" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} required />
+                  <Form.Label>
+                    Phone Number <span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="tel"
+                    name="phoneNumber"
+                    value={formData.phoneNumber}
+                    onChange={handleChange}
+                    required
+                  />
                 </Form.Group>
                 <Form.Group className="mb-3">
-                  <Form.Label>Upload your photo <span className="text-danger">*</span></Form.Label>
+                  <Form.Label>
+                    Upload your photo <span className="text-danger">*</span>
+                  </Form.Label>
                   <Form.Control
                     type="file"
                     name="photo"
@@ -293,7 +536,9 @@ const Register = () => {
               </Col>
             </Row>
 
-            <h5 className="form-section-title mt-4">Course Selection <span className="text-danger">*</span></h5>
+            <h5 className="form-section-title mt-4">
+              Course Selection <span className="text-danger">*</span>
+            </h5>
             <Row>
               <Col md={6}>
                 <h6>Semester I</h6>
@@ -315,36 +560,61 @@ const Register = () => {
               <h6>Note:</h6>
               <ul>
                 <li>All courses are mandatory for new students.</li>
-                <li>Old Students should register for the courses not completed.</li>
+                <li>
+                  Old Students should register for the courses not completed.
+                </li>
               </ul>
               <h6>Fee Calculation:</h6>
               <p>
-                Each course is charged ₹75 per class, and each semester consists of 18 weeks.
-                For example, a 3-credit course will cost ₹75 x 18 weeks x 3 credits = ₹4050.
+                Each course is charged ₹75 per class, and each semester consists
+                of 18 weeks. For example, a 3-credit course will cost ₹75 x 18
+                weeks x 3 credits = ₹4050.
               </p>
               <h6>Breakdown:</h6>
               <ul>
                 <li>Application Fee: ₹300</li>
                 <li>Postage: ₹200</li>
                 <li>Examination Fee: ₹500</li>
-                <li><strong>Total Admission Fees: ₹1000</strong></li>
+                <li>
+                  <strong>Total Admission Fees: ₹1000</strong>
+                </li>
               </ul>
               <Form.Group className="mt-3">
-                <Form.Label style={{ color: "#D9534F" }} name='totalFee'>Total Payment: ₹{totalFee}</Form.Label>
+                <Form.Label style={{ color: "#D9534F" }} name="totalFee">
+                  Total Payment: ₹{totalFee}
+                </Form.Label>
                 <Form.Control type="hidden" name="totalFee" value={totalFee} />
               </Form.Group>
             </div>
 
             {/* Payment Account Details Section */}
-            <div style={{ backgroundColor: "#f0f8ff", padding: "20px", marginTop: "30px", borderRadius: "8px", color: "#003366" }}>
+            <div
+              style={{
+                backgroundColor: "#f0f8ff",
+                padding: "20px",
+                marginTop: "30px",
+                borderRadius: "8px",
+                color: "#003366",
+              }}
+            >
               <h5>Payment Account Details</h5>
-              <p><strong>Account Name:</strong> SPICER MEMORIAL COLLEGE</p>
-              <p><strong>Account Number:</strong> 052210100001351</p>
-              <p><strong>IFSC Code:</strong> BKID0000522</p>
-              <p><strong>Contact:</strong> +91 86238 27226</p>
+              <p>
+                <strong>Account Name:</strong> SPICER MEMORIAL COLLEGE
+              </p>
+              <p>
+                <strong>Account Number:</strong> 052210100001351
+              </p>
+              <p>
+                <strong>IFSC Code:</strong> BKID0000522
+              </p>
+              <p>
+                <strong>Contact:</strong> +91 86238 27226
+              </p>
             </div>
             <Form.Group className="mb-3">
-              <Form.Label>Payment Screenshot <span className="text-danger">*</span></Form.Label>
+              <Form.Label>
+                Payment Screenshot <span className="text-danger">*</span>
+              </Form.Label>
               <Form.Control
                 type="file"
                 name="paymentScreenshot"
@@ -356,7 +626,13 @@ const Register = () => {
 
             {/* Submit Button */}
             <div className="d-flex justify-content-center mt-4">
-              <Button variant="primary" type="submit" disabled={!formData.selectedCourses.length}>Submit Registration</Button>
+              <Button
+                variant="primary"
+                type="submit"
+                disabled={!formData.selectedCourses.length}
+              >
+                Submit Registration
+              </Button>
             </div>
           </Form>
         </Card.Body>
