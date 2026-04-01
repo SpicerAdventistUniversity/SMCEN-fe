@@ -633,9 +633,7 @@ const Register = () => {
               >
                 Submit Registration
               </Button>
-              <Form.Label>
-                Payment Screenshot <span className="text-danger">*</span>
-              </Form.Label>
+           
             </div>
           </Form>
         </Card.Body>
