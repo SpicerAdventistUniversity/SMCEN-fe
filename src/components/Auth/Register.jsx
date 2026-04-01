@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import {
   Form,
@@ -12,7 +12,6 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { Spinner } from "react-bootstrap";
 import { Eye, EyeSlash } from "react-bootstrap-icons"; // 👀 Icons for password toggle
 
 const Register = () => {
@@ -44,7 +43,6 @@ const Register = () => {
   const [success, setSuccess] = useState("");
   const [totalFee, setTotalFee] = useState(0); // To store calculated total fee
   const [showPassword, setShowPassword] = useState(false); // 🔹 Toggle Password
-  const [isSubmitting, setIsSubmitting] = useState(false);
   let navigate = useNavigate();
 
   // Course data, split into two categories: Semester I and Semester II
@@ -199,24 +197,8 @@ const Register = () => {
         error.response?.data?.message ||
           "Registration failed. Please try again.",
       );
-    } finally {
-      setIsSubmitting(false); // ✅ STOP LOADING
     }
   };
-  useEffect(() => {
-    const handleBeforeUnload = (e) => {
-      if (isSubmitting) {
-        e.preventDefault();
-        e.returnValue = ""; // Required for Chrome
-      }
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [isSubmitting]);
 
   return (
     <Container className="d-flex justify-content-center align-items-center min-vh-100">
@@ -643,20 +625,15 @@ const Register = () => {
             </Form.Group>
 
             {/* Submit Button */}
-            <Button
-              variant="primary"
-              type="submit"
-              disabled={!formData.selectedCourses.length || isSubmitting}
-            >
-              {isSubmitting ? (
-                <>
-                  <Spinner animation="border" size="sm" className="me-2" />
-                  Submitting... Please wait
-                </>
-              ) : (
-                "Submit Registration"
-              )}
-            </Button>
+            <div className="d-flex justify-content-center mt-4">
+              <Button
+                variant="primary"
+                type="submit"
+                disabled={!formData.selectedCourses.length}
+              >
+                Submit Registration
+              </Button>
+            </div>
           </Form>
         </Card.Body>
       </Card>
