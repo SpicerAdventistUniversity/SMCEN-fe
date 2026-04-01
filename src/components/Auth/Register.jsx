@@ -633,9 +633,9 @@ const Register = () => {
               >
                 Submit Registration
               </Button>
-              <div>
-                <p>Do not refresh the page while submitting, please wait !</p>
-              </div>
+              <Form.Label>
+                Payment Screenshot <span className="text-danger">*</span>
+              </Form.Label>
             </div>
           </Form>
         </Card.Body>
