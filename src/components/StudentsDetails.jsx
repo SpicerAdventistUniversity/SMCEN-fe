@@ -79,18 +79,17 @@ const StudentDetails = () => {
   };
 
   // Filter students based on search query
-const filteredUsers = users
+const filteredStudents = students
   .filter(
-    (user) =>
-      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (user.registrationNumber &&
-        user.registrationNumber.toLowerCase().includes(searchQuery.toLowerCase()))
+    (student) =>
+      student.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (student.registrationNumber &&
+        student.registrationNumber.toLowerCase().includes(searchQuery.toLowerCase()))
   )
   .sort((a, b) => {
     const getNumber = (reg) => {
       if (!reg) return 0;
-      const numPart = reg.replace(/\D/g, ""); // remove letters → keep only numbers
-      return Number(numPart);
+      return Number(reg.replace(/\D/g, "")); // extract numbers only
     };
 
     return getNumber(a.registrationNumber) - getNumber(b.registrationNumber);
