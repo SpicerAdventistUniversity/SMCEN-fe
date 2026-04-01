@@ -633,7 +633,9 @@ const Register = () => {
               >
                 Submit Registration
               </Button>
-              <p>Do not refresh the page while submitting, please wait !</p>
+              <div>
+                <p>Do not refresh the page while submitting, please wait !</p>
+              </div>
             </div>
           </Form>
         </Card.Body>
