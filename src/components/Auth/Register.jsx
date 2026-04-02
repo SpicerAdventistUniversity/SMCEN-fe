@@ -43,6 +43,7 @@ const Register = () => {
   const [success, setSuccess] = useState("");
   const [totalFee, setTotalFee] = useState(0); // To store calculated total fee
   const [showPassword, setShowPassword] = useState(false); // 🔹 Toggle Password
+  const [isSubmitting, setIsSubmitting] = useState(false);
   let navigate = useNavigate();
 
   // Course data, split into two categories: Semester I and Semester II
