@@ -43,7 +43,6 @@ const Register = () => {
   const [success, setSuccess] = useState("");
   const [totalFee, setTotalFee] = useState(0); // To store calculated total fee
   const [showPassword, setShowPassword] = useState(false); // 🔹 Toggle Password
-  const [isSubmitting, setIsSubmitting] = useState(false);
   let navigate = useNavigate();
 
   // Course data, split into two categories: Semester I and Semester II
@@ -627,25 +626,13 @@ const Register = () => {
 
             {/* Submit Button */}
             <div className="d-flex justify-content-center mt-4">
-              {/* <Button
+              <Button
                 variant="primary"
                 type="submit"
                 disabled={!formData.selectedCourses.length}
               >
                 Submit Registration
-              </Button> */}
-              <Button
-                variant="primary"
-                type="submit"
-                disabled={!formData.selectedCourses.length || isSubmitting}
-              >
-                {isSubmitting ? "Submitting... ⏳" : "Submit Registration"}
               </Button>
-              {isSubmitting && (
-                <div className="alert alert-warning text-center mt-3">
-                  ⚠️ Please do not refresh or close the page while submitting.
-                </div>
-              )}
             </div>
           </Form>
         </Card.Body>
