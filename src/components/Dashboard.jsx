@@ -1,3 +1,4 @@
+//Student Dashboard
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
@@ -142,12 +143,12 @@ const Dashboard = () => {
               </Table>
 
               <div className="mb-5 text-center">
-                <Button
+                {/* <Button
                   onClick={() => navigate("/register2")}
                   className="btn btn-success px-4 py-2 rounded shadow fw-bold"
                 >
                   Register for Second Semester
-                </Button>
+                </Button> */}
                 <h6 className="text-gray-700"><i>
                   Note:Second semester registration will open after the completion of the first semester.
                 </i></h6>

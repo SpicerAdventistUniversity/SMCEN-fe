@@ -633,7 +633,6 @@ const Register = () => {
               >
                 Submit Registration
               </Button>
-           
             </div>
           </Form>
         </Card.Body>
